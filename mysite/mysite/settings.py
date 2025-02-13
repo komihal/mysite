@@ -67,8 +67,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mysite_db',  # Имя базы
+        'USER': 'mysite_user',      # Имя пользователя
+        'PASSWORD': 'duprag-7jatDu~qjgjys',  # Пароль пользователя
+        'HOST': '217.114.2.152',   # IP-адрес твоего VDS (или 'localhost', если Django на сервере)
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',  # Используем зашифрованное соединение
+        },
     }
 }
 
