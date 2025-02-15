@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+  <h1>Добро пожаловать!</h1>
+  <p>Это моя главная страница. Слева — меню для перехода по разделам.</p>
+
+  <!-- Пример: Vue-компонент -->
+  <div id="vue-home">
+    <h2>Счётчик Vue</h2>
+    <p>[[ message ]]</p>
+    <button @click="count++" class="btn btn-primary">Счёт: [[ count ]]</button>
+  </div>
+
+  <script>
+  const { createApp } = Vue;
+  createApp({
+    delimiters: ['[[', ']]'], 
+    data() {
+      return {
+        message: 'Привет из Vue!',
+        count: 0
+      };
+    }
+  }).mount('#vue-home');
+  </script>
+{% endblock %}

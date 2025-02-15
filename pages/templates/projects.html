@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Проекты{% endblock %}
+{% block content %}
+  <h1>Мои проекты</h1>
+  <p>Список реализованных проектов:</p>
+
+  <ul class="list-group">
+    <li class="list-group-item">Проект 1</li>
+    <li class="list-group-item">Проект 2</li>
+    <li class="list-group-item">Проект 3</li>
+  </ul>
+
+  <!-- Пример мини-виджета Vue -->
+  <div id="vue-projects">
+    <h2>Рейтинг проектов</h2>
+    <p>[[ text ]]</p>
+    <button class="btn btn-success" @click="like()">Лайк</button>
+    <span>[[ likes ]] лайков</span>
+  </div>
+
+  <script>
+  const { createApp } = Vue;
+  createApp({
+    delimiters: ['[[', ']]'],
+    data() {
+      return {
+        text: 'Оцените мои проекты',
+        likes: 0
+      }
+    },
+    methods: {
+      like() {
+        this.likes++;
+      }
+    }
+  }).mount('#vue-projects');
+  </script>
+{% endblock %}
