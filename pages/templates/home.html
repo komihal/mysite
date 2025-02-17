@@ -1,27 +1,72 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Главная{% endblock %}
+
 {% block content %}
-  <h1>Добро пожаловать!</h1>
-  <p>Это моя главная страница. Слева — меню для перехода по разделам.</p>
 
-  <!-- Пример: Vue-компонент -->
-  <div id="vue-home">
-    <h2>Счётчик Vue</h2>
-    <p>[[ message ]]</p>
-    <button @click="count++" class="btn btn-primary">Счёт: [[ count ]]</button>
+<div id="app">
+  <!-- Интро с коротким описанием -->
+  <section class="hero text-center py-2">
+    <div class="container">
+      <h1 class="display-4">Привет, я {{ user_name }}</h1>
+      <p class="lead">Разрабатываю сложные веб-приложения и автоматизирую бизнес-процессы.</p>
+        <p>
+            <a href="#projects" class="btn btn-primary m-2 btn-lg">Посмотреть работы</a>
+            <a href="#contact" class="btn btn-outline-secondary m-2 btn-lg">Связаться</a>
+        </p>
+    </div>
+  </section>
+  {% include 'resume_snippet.html' %}
+
+  <!-- Секция с актуальными проектами -->
+  <section id="projects" class="container my-5">
+    <div id="app">
+        <!-- Vue-цикл -->
+        <div class="row">
+          <div v-for="project in projects" :key="project.id" class="col-md-4 mb-4">
+  <div class="card shadow-sm d-flex flex-column h-100">
+    <div class="image-container">
+        <img v-if="project.image" :src="'/media/' + project.image" class="card-img-top" :alt="project.title">    </div>
+    <div class="card-body flex-grow-1 d-flex flex-column">
+      <h5 class="card-title">{{ project.title }}</h5>
+      <p class="card-text flex-grow-1">{{ project.short_desc }}</p>
+      <a :href="project.url" class="btn btn-outline-primary mt-auto" target="_blank">Подробнее</a>
+    </div>
   </div>
+</div>
+        </div>
+      </div>
+  </section>
 
-  <script>
-  const { createApp } = Vue;
-  createApp({
-    delimiters: ['[[', ']]'], 
+  <!-- Блок "Обо мне" -->
+  <section id="about" class="bg-light py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Обо мне</h2>
+      <p class="text-center">
+        Я занимаюсь разработкой веб-приложений, специализируюсь на Django и Vue.js. <br>
+        Создаю удобные интерфейсы и автоматизирую процессы для бизнеса.
+      </p>
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contact" class="container my-5 text-center">
+    <h2>Свяжитесь со мной</h2>
+    <p>Email: <a href="mailto:{{ email }}">{{ email }}</a></p>
+    <p>Telegram: <a :href="'https://t.me/' + telegram" target="_blank">@{{ telegram }}</a></p>
+  </section>
+</div>
+<!-- Подключение Vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+<script>
+  const projectsData = {{ projects|safe }};
+
+  const app = Vue.createApp({
     data() {
       return {
-        message: 'Привет из Vue!',
-        count: 0
+        projects: projectsData,
       };
     }
-  }).mount('#vue-home');
-  </script>
+  }).mount("#app");
+</script>
+
 {% endblock %}

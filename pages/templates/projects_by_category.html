@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Все проекты{% endblock %}
+{% block title %}Проекты по категории{% endblock %}
 
 {% block content %}
+<h1>Проекты в категории: {{ category }}</h1>
 <div class="row">
   {% for project in projects %}
     <div class="col-md-4 mb-4">
       <div class="card shadow-sm">
-        <!-- Отображаем картинку, если есть -->
         {% if project.image %}
         <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
         {% endif %}
@@ -22,7 +22,7 @@
       </div>
     </div>
   {% empty %}
-    <p>Пока нет проектов.</p>
+    <p>В этой категории пока нет проектов.</p>
   {% endfor %}
 </div>
 {% endblock %}
