@@ -13,7 +13,7 @@ def home_view(request):
     context = {
         "user_name": resume.full_name if resume else "Имя не задано",
         "email": resume.email if resume else "email@example.com",
-        "telegram": "kozlov_m",  # Можно брать из Resume
+        "telegram": "komihal7",  # Можно брать из Resume
         "projects": projects,
         "resume": resume,  # Передаём объект резюме
     }
